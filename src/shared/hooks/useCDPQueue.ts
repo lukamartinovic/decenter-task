@@ -1,40 +1,16 @@
 import useContract from "./useContract";
 import {useEffect, useState} from "react";
 import PQueue from "p-queue";
-import {getCDPIds} from "../utils";
-import {BigNumber, utils} from "ethers";
+import {formatCDPData, getCDPIds} from "../utils";
+import {utils} from "ethers";
 
 const concurrentSearches = 5;
-
-interface CDP {
-    collateral: BigNumber,
-    debt: BigNumber,
-    ilk: string,
-    owner: string,
-    urn: string,
-    userAddr: string
-}
-
-interface FormattedCDP {
-    collateral: string,
-    debt: string,
-    collateralType: string,
-    owner: string,
-    userAddr: string
-}
-
-const formatCDPData = ({collateral, debt, ilk, urn, owner, userAddr}: CDP): FormattedCDP => {
-    return ({
-        collateral: collateral.toString(),
-        debt: debt.toString(),
-        collateralType: utils.parseBytes32String(ilk),
-        owner,
-        userAddr
-    })
-}
+const maxSearchResults = 20;
 
 export const useCDPQueue = () => {
     const [query, setQuery] = useState<string>('');
+    const [progress, setProgress] = useState<number>(0);
+    const [collateralType, setCollateralType] = useState<'' | CollateralTypes>('');
     const [CDPData, setCDPData] = useState<FormattedCDP[]>();
 
     const {contractRef, initialized} = useContract();
@@ -42,17 +18,31 @@ export const useCDPQueue = () => {
     useEffect(() => {
         if(query && initialized) {
             setCDPData([]);
+            setProgress(0);
             const contract = contractRef.current;
-            const inputPromises = getCDPIds(query).map(input => () => contract?.getCdpInfo(input))
+
+            let CDPIds = getCDPIds(+query, maxSearchResults);
+
+            const getContractPromise = (input: string) => async () => {
+                const CDP = await contract?.getCdpInfo(input);
+                return ({...CDP, id: input});
+            }
+
+            const inputPromises = CDPIds.map(getContractPromise)
             const queue = new PQueue({concurrency: concurrentSearches});
-            queue.addAll(inputPromises);
 
             queue.on('completed', data => {
-                console.log(data);
-                setCDPData(prevState => [...(prevState || []), formatCDPData(data)]);
+                setProgress((prevProgress => prevProgress + (1 / maxSearchResults)))
+                const parsedCollateralType = utils.parseBytes32String(data.ilk);
+                if(!parsedCollateralType)
+                    return;
+                if(utils.parseBytes32String(data.ilk) === collateralType || collateralType === '')
+                    setCDPData(prevState => [...(prevState || []), formatCDPData(data)]);
             })
-        }
-    }, [initialized, query])
 
-    return {setQuery, query, CDPData}
+            queue.addAll(inputPromises);
+        }
+    }, [initialized, query, collateralType, contractRef])
+
+    return {setQuery, setCollateralType, query, collateralType, CDPData, progress}
 }

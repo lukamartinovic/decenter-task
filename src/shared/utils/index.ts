@@ -1,19 +1,32 @@
-import {BigNumber} from "ethers";
+import {utils} from "ethers";
 
-export const getCDPIds = (id: string): string[] => {
+export const getCDPIds = (id: number, numberOfIds: number): string[] => {
     const CDPIds = [];
 
-    const BNId = BigNumber.from(id);
+    const isMin = id < Math.round(numberOfIds / 2);
 
-    const isMin = BigNumber.from(BNId).lt(10);
+    const rangeStart = isMin ? 0 : id - Math.round(numberOfIds / 2);
+    const rangeEnd = isMin ? numberOfIds : id + Math.round(numberOfIds / 2);
 
-    const rangeStart = isMin ? BigNumber.from(1) : BigNumber.from(BNId).sub(10);
-    const rangeEnd = isMin ? BigNumber.from(20) : BigNumber.from(BNId).add(10);
-
-    for(let i = rangeStart; i.lte(rangeEnd); i = i.add(1)) {
+    for(let i = rangeStart; i <= rangeEnd; i++) {
         CDPIds.push(i.toString());
     }
 
-    return CDPIds;
+    return CDPIds.slice(0, numberOfIds);
 }
 
+export const sortCDPsByClosestId =
+    (data: FormattedCDP[], id: number) =>
+        data.sort((a, b) =>
+            Math.abs(a.id - id) - Math.abs(b.id - id));
+
+export const formatCDPData = ({collateral, debt, ilk, urn, owner, userAddr, id}: CDP): FormattedCDP => {
+    return ({
+        collateral: collateral.toString(),
+        debt: debt.toString(),
+        collateralType: utils.parseBytes32String(ilk),
+        owner,
+        userAddr,
+        id
+    })
+}
