@@ -1,4 +1,5 @@
 import {BigNumber} from "ethers";
+import {collateralTypes} from "./shared/constants";
 
 declare global {
     interface CDP {
@@ -20,5 +21,10 @@ declare global {
         id: number
     }
 
-    type CollateralTypes = 'ETH-A' | 'WBTC-A' | 'USDC-A';
+    module "*.module.scss" {
+        const classes: { [key: string]: string };
+        export default classes;
+    }
+
+    type CollateralTypes = string;
 }
