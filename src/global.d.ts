@@ -1,5 +1,4 @@
 import {BigNumber} from "ethers";
-import {collateralTypes} from "./shared/constants";
 
 declare global {
     interface CDP {
@@ -27,4 +26,6 @@ declare global {
     }
 
     type CollateralTypes = string;
+
+    module "*.svg"
 }

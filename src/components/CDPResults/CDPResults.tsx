@@ -13,6 +13,6 @@ export const CDPResults = ({data}: { data: FormattedCDP[] }) => {
             <th>Owner</th>
             <th>User</th>
         </tr>
-        {data.map(data => <CDP data={data}/>)}
+        {data.map(data => <CDP key={data.id} data={data}/>)}
     </table>
 }

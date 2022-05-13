@@ -1,4 +1,4 @@
-import useContract from "./useContract";
+import useGetCDPContract from "./useGetCDPContract";
 import {useEffect, useState} from "react";
 import PQueue from "p-queue";
 import {formatCDPData, getCDPIds} from "../utils";
@@ -15,7 +15,7 @@ export const useCDPQueue = () => {
     const [collateralType, setCollateralType] = useState<'' | CollateralTypes>('');
     const [CDPData, setCDPData] = useState<FormattedCDP[]>([]);
 
-    const {contractRef, initialized} = useContract();
+    const {contractRef, initialized} = useGetCDPContract();
 
     useEffect(() => {
         if(query && initialized) {
