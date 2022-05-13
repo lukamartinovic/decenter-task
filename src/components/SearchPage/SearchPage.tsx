@@ -35,6 +35,7 @@ const SearchPage = () => {
     }
 
     const data = sortCDPsByClosestId(CDPData, +query);
+
     return (
         <div className={style.searchPage}>
             <header>
@@ -59,7 +60,7 @@ const SearchPage = () => {
                     {isSearching && <ProgressBar progress={progress}/>}
                 </nav>
                 <section>
-                    <CDPResults data={data} />
+                    <CDPResults data={data}/>
                     {noResults && <ZeroState />}
                 </section>
             </main>

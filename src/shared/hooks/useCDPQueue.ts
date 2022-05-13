@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import PQueue from "p-queue";
 import {formatCDPData, getCDPIds} from "../utils";
 import {utils} from "ethers";
-import {formatEther} from "ethers/lib/utils";
 
 const concurrentSearches = 5;
 const maxSearchResults = 20;
@@ -15,10 +14,10 @@ export const useCDPQueue = () => {
     const [collateralType, setCollateralType] = useState<'' | CollateralTypes>('');
     const [CDPData, setCDPData] = useState<FormattedCDP[]>([]);
 
-    const {contractRef, initialized} = useGetCDPContract();
+    const {contractRef} = useGetCDPContract();
 
     useEffect(() => {
-        if(query && initialized) {
+        if(query) {
             setIsSearching(true);
             setCDPData([]);
             setProgress(0);
@@ -46,11 +45,13 @@ export const useCDPQueue = () => {
                     setCDPData(prevState => [...(prevState || []), formatCDPData(data)]);
             })
 
+            queue.on('error', err => console.error(err))
+
             queue.on('idle', () => setIsSearching(false))
 
             queue.addAll(inputPromises);
         }
-    }, [initialized, query, collateralType, contractRef])
+    }, [query, collateralType, contractRef])
 
     return {setQuery, setCollateralType, query, collateralType, CDPData, progress, isSearching}
 }

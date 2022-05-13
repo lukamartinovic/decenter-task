@@ -1,4 +1,4 @@
-import {utils} from "ethers";
+import {BigNumber, utils} from "ethers";
 
 export const getCDPIds = (id: number, numberOfIds: number): string[] => {
     const CDPIds = [];
@@ -29,4 +29,10 @@ export const formatCDPData = ({collateral, debt, ilk, urn, owner, userAddr, id}:
         userAddr,
         id
     })
+}
+
+export const bigNumberToPercentage = (number: BigNumber) => {
+    const parsedNumber = number.toString().slice(0, 15).split('');
+    parsedNumber.splice(1, 0, '.')
+    return Number(parsedNumber.join(''));
 }
