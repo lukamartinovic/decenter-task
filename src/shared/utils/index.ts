@@ -1,5 +1,8 @@
 import {BigNumber, utils} from "ethers";
 
+import Decimal from "decimal.js";
+import {formatEther} from "ethers/lib/utils";
+
 export const getCDPIds = (id: number, numberOfIds: number): string[] => {
     const CDPIds = [];
 
@@ -20,7 +23,7 @@ export const sortCDPsByClosestId =
         data.sort((a, b) =>
             Math.abs(a.id - id) - Math.abs(b.id - id));
 
-export const formatCDPData = ({collateral, debt, ilk, urn, owner, userAddr, id}: CDP): FormattedCDP => {
+export const formatCDPData = ({collateral, debt, ilk, owner, userAddr, id}: CDP): FormattedCDP => {
     return ({
         collateral: collateral.toString(),
         debt: debt.toString(),
@@ -35,4 +38,11 @@ export const bigNumberToPercentage = (number: BigNumber) => {
     const parsedNumber = number.toString().slice(0, 15).split('');
     parsedNumber.splice(1, 0, '.')
     return Number(parsedNumber.join(''));
+}
+
+export const getTotalDebt = (debt: string, rate: string ) => {
+    const decimalDebt = new Decimal(formatEther(debt))
+    let decimalRate = rate.split('')
+    decimalRate.splice(1, 0, '.')
+    return decimalDebt.mul(decimalRate.join('')).toFixed(9);
 }

@@ -34,9 +34,9 @@ export const useCDPQueue = () => {
             const queue = new PQueue({concurrency: concurrentSearches});
 
             queue.on('completed', data => {
-                const matchesCollateralType = utils.parseBytes32String(data.ilk) === collateralType || collateralType === '';
-
                 setProgress((prevProgress => prevProgress + (1 / maxSearchResults)))
+
+                const matchesCollateralType = utils.parseBytes32String(data.ilk) === collateralType || collateralType === '';
                 const parsedCollateralType = utils.parseBytes32String(data.ilk);
 
                 if(!parsedCollateralType)
@@ -45,7 +45,9 @@ export const useCDPQueue = () => {
                     setCDPData(prevState => [...(prevState || []), formatCDPData(data)]);
             })
 
-            queue.on('error', err => console.error(err))
+            queue.on('error', err => {
+                console.error(err);
+            })
 
             queue.on('idle', () => setIsSearching(false))
 

@@ -2,7 +2,6 @@ import {useEffect, useState} from "react";
 import {ethers} from "ethers";
 import {getRateABI, getRateAddress} from "../constants";
 import {formatBytes32String} from "ethers/lib/utils";
-import {bigNumberToPercentage} from "../utils";
 
 export const useRateContract = (collateralType: string) => {
     const [rates, setRates] = useState<{rate: number, collateralType: string}[]>([])
@@ -17,7 +16,7 @@ export const useRateContract = (collateralType: string) => {
                 setGettingRates(true);
                 let contract = new ethers.Contract(getRateAddress, getRateABI, provider.getSigner());
                 const data = await contract.ilks(formatBytes32String(collateralType))
-                const rate = bigNumberToPercentage(data.rate);
+                const rate = data.rate;
                 setRates((prevRates) => [...prevRates, {collateralType, rate}])
                 setGettingRates(false);
             } catch (e) {
