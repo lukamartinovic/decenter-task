@@ -38,7 +38,10 @@ export const useCDPQueue = () => {
                 const matchesCollateralType = utils.parseBytes32String(data.ilk) === collateralType || collateralType === '';
 
                 setProgress((prevProgress => prevProgress + (1 / maxSearchResults)))
+                const parsedCollateralType = utils.parseBytes32String(data.ilk);
 
+                if(!parsedCollateralType)
+                    return;
                 if(matchesCollateralType)
                     setCDPData(prevState => [...(prevState || []), formatCDPData(data)]);
             })

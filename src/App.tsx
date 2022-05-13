@@ -7,6 +7,7 @@ import {sortCDPsByClosestId} from "./shared/utils";
 import {CDPResults} from "./components/CDPResults/CDPResults";
 import style from './App.module.scss';
 import ProgressBar from "./components/shared/ProgressBar";
+import {FaSearch, FaSpinner} from "react-icons/fa";
 
 function App() {
     const {setQuery, query, CDPData, collateralType, setCollateralType, progress, isSearching} = useCDPQueue();
@@ -20,6 +21,10 @@ function App() {
     }, 350), [setQuery]);
 
     const handleSetQuery = ({target: {value}}: React.ChangeEvent<HTMLInputElement>) => {
+        if(value.length > 15)
+            value = value.slice(0, 15)
+        if(+value <= 0)
+            value = '';
         setState(value);
         debouncedSetQuery(value);
     };
@@ -48,7 +53,8 @@ function App() {
                     </label>
                     <label>
                         CDP ID
-                        <input type='number' value={state} onChange={handleSetQuery}/>
+                        <input min={0} maxLength={15} type='number' value={state} onChange={handleSetQuery}/>
+                        {isSearching ? <FaSpinner className={style.spinner}/> : <FaSearch/>}
                     </label>
                 </nav>
                 <section>

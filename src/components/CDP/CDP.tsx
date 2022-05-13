@@ -1,11 +1,11 @@
 import React from "react";
-import style from './CDP.module.scss'
 import {formatEther} from "ethers/lib/utils";
+import {Address} from "../shared/Address";
 
 export const CDP = ({data}: { data: FormattedCDP }) => {
     return <tr>
         <td>
-            <strong>ID: {data.id}</strong>
+            <strong>{data.id}</strong>
         </td>
         <td>
             <span>{Number(formatEther(data.collateral)).toLocaleString()} <small>{data.collateralType}</small></span>
@@ -14,10 +14,11 @@ export const CDP = ({data}: { data: FormattedCDP }) => {
             <span>{Number(formatEther(data.debt)).toLocaleString()} <small>DAI</small></span>
         </td>
         <td>
-            <a href={`https://etherscan.io/address/${data.owner}`} target='_blank'>{data.owner.slice(0,5)}...{data.owner.slice(-5)}</a>
+            <Address address={data.owner} />
         </td>
         <td>
-            <a href={`https://etherscan.io/address/${data.userAddr}`} target='_blank'>{data.userAddr.slice(0,5)}...{data.userAddr.slice(-5)}</a>
+            <Address address={data.userAddr}/>
         </td>
     </tr>
 }
+
