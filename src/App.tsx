@@ -8,6 +8,7 @@ import {CDPResults} from "./components/CDPResults/CDPResults";
 import style from './App.module.scss';
 import ProgressBar from "./components/shared/ProgressBar";
 import {FaSearch, FaSpinner} from "react-icons/fa";
+import {ZeroState} from "./components/shared/ZeroState";
 
 function App() {
     const {setQuery, query, CDPData, collateralType, setCollateralType, progress, isSearching} = useCDPQueue();
@@ -60,7 +61,7 @@ function App() {
                 <section>
                     {isSearching && <ProgressBar progress={progress}/>}
                     <CDPResults data={data} />
-                    {noResults && <span>No results</span>}
+                    {noResults && <ZeroState />}
                 </section>
             </main>
         </div>
