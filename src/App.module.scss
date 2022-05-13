@@ -16,6 +16,9 @@
   }
 
   > main {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
     background: white;
     color: black;
     padding: 1rem;

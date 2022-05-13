@@ -35,11 +35,11 @@ export const useCDPQueue = () => {
             const queue = new PQueue({concurrency: concurrentSearches});
 
             queue.on('completed', data => {
-                console.log(formatEther(data.collateral),formatEther(data.debt));
+                const matchesCollateralType = utils.parseBytes32String(data.ilk) === collateralType || collateralType === '';
+
                 setProgress((prevProgress => prevProgress + (1 / maxSearchResults)))
-                if(!Number(formatEther(data.collateral)) && !Number(formatEther(data.debt)))
-                    return;
-                if(utils.parseBytes32String(data.ilk) === collateralType || collateralType === '')
+
+                if(matchesCollateralType)
                     setCDPData(prevState => [...(prevState || []), formatCDPData(data)]);
             })
 
