@@ -5,11 +5,11 @@ import {ConnectMetamask} from "./components/ConnectMetamask/ConnectMetamask";
 import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
-    const {injectMetamask, metamaskConnected} = useInjectMetamask();
+    const injectMetmaskProps = useInjectMetamask();
 
-    return metamaskConnected ?
+    return injectMetmaskProps.metamaskConnected ?
         <SearchPage /> :
-        <ConnectMetamask injectMetamask={injectMetamask}/>;
+        <ConnectMetamask {...injectMetmaskProps}/>;
 
 }
 

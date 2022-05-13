@@ -1,9 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
 import style from "./ConnectMetamask.module.scss";
 import {ReactComponent as MetaMaskLogo} from '../../assets/MetaMask_Fox.svg';
 
-export const ConnectMetamask = ({injectMetamask}: { injectMetamask: () => void }) => {
-    const [connectingMetamask] = useState<boolean>(false)
+export const ConnectMetamask = ({injectMetamask, connectingMetamask}: { injectMetamask: () => void, connectingMetamask: boolean }) => {
 
     const handleMetamaskConnect = () => {
         injectMetamask()
