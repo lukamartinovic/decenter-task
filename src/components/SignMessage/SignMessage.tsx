@@ -3,7 +3,7 @@ import {ethers} from "ethers";
 import style from './SignMessage.module.scss';
 import {AiOutlineClose} from "react-icons/ai";
 import modalStyles from '../../shared/styles.module.scss'
-import { FaFileSignature} from "react-icons/fa";
+import {FaFileSignature} from "react-icons/fa";
 
 type Message = {
     message: string,

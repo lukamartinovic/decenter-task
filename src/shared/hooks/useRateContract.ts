@@ -1,5 +1,5 @@
 import {useEffect, useState} from "react";
-import {BigNumber, BigNumberish, ethers} from "ethers";
+import {ethers} from "ethers";
 import {getRateABI, getRateAddress} from "../constants";
 import {formatBytes32String} from "ethers/lib/utils";
 

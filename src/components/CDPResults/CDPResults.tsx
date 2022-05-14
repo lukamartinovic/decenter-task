@@ -1,5 +1,5 @@
-import {CDP} from "../CDP/CDP";
 import React from "react";
+import {CDP} from "components";
 import style from './CDPResults.module.scss';
 
 type CDPResultsProps = {
@@ -7,7 +7,7 @@ type CDPResultsProps = {
     setSelectedCDP: React.Dispatch<React.SetStateAction<FormattedCDP | null>>
 }
 
-export const CDPResults = ({data, setSelectedCDP}: CDPResultsProps) => {
+const CDPResults = ({data, setSelectedCDP}: CDPResultsProps) => {
     if(data.length === 0) return null;
 
     return <table className={style.results}>
@@ -21,3 +21,5 @@ export const CDPResults = ({data, setSelectedCDP}: CDPResultsProps) => {
         {data.map(data => <CDP setSelectedCDP={setSelectedCDP} key={data.id} data={data}/>)}
     </table>
 }
+
+export default CDPResults;

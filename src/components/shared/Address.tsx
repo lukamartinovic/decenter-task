@@ -1,8 +1,8 @@
-import {FaRegCopy} from "react-icons/fa";
 import React from "react";
+import {FaRegCopy} from "react-icons/fa";
 import style from './Address.module.scss';
 
-export const Address = ({address, truncate = true}: { address: string, truncate?: boolean }) => {
+const Address = ({address, truncate = true}: { address: string, truncate?: boolean }) => {
     const handleCopy = () => {
         navigator.clipboard.writeText(address)
     }
@@ -17,3 +17,5 @@ export const Address = ({address, truncate = true}: { address: string, truncate?
         </button>
     </div>
 }
+
+export default Address;

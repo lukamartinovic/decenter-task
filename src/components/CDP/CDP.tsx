@@ -1,17 +1,17 @@
 import React from "react";
-import {formatEther} from "ethers/lib/utils";
-import {Address} from "../shared/Address";
-import {useRateContract} from "../../shared/hooks/useRateContract";
-import {getTotalDebt} from "../../shared/utils";
-import style from './CDP.module.scss';
+import {Address} from "components/shared";
 import {AiOutlineProfile} from "react-icons/ai";
+import {useRateContract} from "shared/hooks/useRateContract";
+import {formatEther} from "ethers/lib/utils";
+import {getTotalDebt} from "shared/utils";
+import style from './CDP.module.scss';
 
 type CDPProps = {
     data: FormattedCDP,
     setSelectedCDP: React.Dispatch<React.SetStateAction<FormattedCDP | null>>
 }
 
-export const CDP = ({data, setSelectedCDP}: CDPProps) => {
+const CDP = ({data, setSelectedCDP}: CDPProps) => {
     const {rate} = useRateContract(data.collateralType);
 
     if(!rate) return null;
@@ -38,3 +38,4 @@ export const CDP = ({data, setSelectedCDP}: CDPProps) => {
     </tr>
 }
 
+export default CDP;

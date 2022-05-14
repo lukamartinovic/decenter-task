@@ -1,6 +1,6 @@
 import detectEthereumProvider from "@metamask/detect-provider";
 import {Web3Provider} from "@ethersproject/providers";
-import {useEffect, useLayoutEffect, useState} from "react";
+import {useLayoutEffect, useState} from "react";
 
 export const useInjectMetamask = () => {
     const [metamaskConnected, setMetamaskConnected] = useState<boolean>(false);

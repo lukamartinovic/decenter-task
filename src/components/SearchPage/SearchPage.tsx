@@ -1,16 +1,12 @@
-import {useCDPQueue} from "../../shared/hooks/useCDPQueue";
 import React, {useCallback, useState} from "react";
-import debounce from "lodash/debounce";
-import {sortCDPsByClosestId} from "../../shared/utils";
-import style from "./SearchPage.module.scss";
-import {collateralTypes} from "../../shared/constants";
+import {CDPDetails, CDPResults, SignMessage} from "components";
+import {ProgressBar, ZeroState} from "components/shared";
 import {FaSearch, FaSpinner} from "react-icons/fa";
-import ProgressBar from "../shared/ProgressBar";
-import {CDPResults} from "../CDPResults/CDPResults";
-import {ZeroState} from "../shared/ZeroState";
-import CDPDetails from "../CDPDetails/CDPDetails";
-import {ethers} from "ethers";
-import SignMessage from "../SignMessage/SignMessage";
+import {useCDPQueue} from "shared/hooks/useCDPQueue";
+import {sortCDPsByClosestId} from "shared/utils";
+import {collateralTypes} from "shared/constants";
+import debounce from "lodash/debounce";
+import style from "./SearchPage.module.scss";
 
 const SearchPage = () => {
     const {setQuery, query, CDPData, collateralType, setCollateralType, progress, isSearching} = useCDPQueue();

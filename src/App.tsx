@@ -1,8 +1,7 @@
 import React from 'react';
+import {useInjectMetamask} from "shared/hooks/useInjectMetamask";
+import {ConnectMetamask, SearchPage} from "components";
 import './components/SearchPage/SearchPage.module.scss';
-import {useInjectMetamask} from "./shared/hooks/useInjectMetamask";
-import {ConnectMetamask} from "./components/ConnectMetamask/ConnectMetamask";
-import SearchPage from "./components/SearchPage/SearchPage";
 
 function App() {
     const injectMetmaskProps = useInjectMetamask();

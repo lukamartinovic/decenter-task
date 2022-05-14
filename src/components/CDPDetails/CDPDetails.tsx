@@ -1,13 +1,13 @@
-import style from './CDPDetails.module.scss';
 import React from "react";
-import {formatEther} from "ethers/lib/utils";
-import {getExtraCDPDetails} from "../../shared/utils";
-import {Address} from "../shared/Address";
-import {useRateContract} from "../../shared/hooks/useRateContract";
+import {Address} from "components/shared";
 import {AiOutlineClose} from "react-icons/ai";
 import {FaExclamation} from "react-icons/fa";
-import {collateralPrices} from "../../shared/constants";
-import modalStyles from '../../shared/styles.module.scss'
+import {useRateContract} from "shared/hooks/useRateContract";
+import {formatEther} from "ethers/lib/utils";
+import {getExtraCDPDetails} from "shared/utils";
+import {collateralPrices} from "shared/constants";
+import modalStyles from 'shared/styles.module.scss'
+import style from './CDPDetails.module.scss';
 
 
 type CDPDetailsProps = {

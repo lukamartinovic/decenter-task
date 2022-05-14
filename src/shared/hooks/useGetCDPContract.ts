@@ -1,4 +1,4 @@
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef} from "react";
 import {Contract, ethers} from "ethers";
 import {getCDPABI, getCDPAddress} from "../constants";
 
