@@ -2,7 +2,12 @@ import {CDP} from "../CDP/CDP";
 import React from "react";
 import style from './CDPResults.module.scss';
 
-export const CDPResults = ({data}: { data: FormattedCDP[] }) => {
+type CDPResultsProps = {
+    data: FormattedCDP[],
+    setSelectedCDP: React.Dispatch<React.SetStateAction<FormattedCDP | null>>
+}
+
+export const CDPResults = ({data, setSelectedCDP}: CDPResultsProps) => {
     if(data.length === 0) return null;
 
     return <table className={style.results}>
@@ -13,6 +18,6 @@ export const CDPResults = ({data}: { data: FormattedCDP[] }) => {
             <th>Owner</th>
             <th>User</th>
         </tr>
-        {data.map(data => <CDP key={data.id} data={data}/>)}
+        {data.map(data => <CDP setSelectedCDP={setSelectedCDP} key={data.id} data={data}/>)}
     </table>
 }

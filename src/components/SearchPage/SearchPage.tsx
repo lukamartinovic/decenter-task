@@ -8,11 +8,12 @@ import {FaSearch, FaSpinner} from "react-icons/fa";
 import ProgressBar from "../shared/ProgressBar";
 import {CDPResults} from "../CDPResults/CDPResults";
 import {ZeroState} from "../shared/ZeroState";
+import CDPDetails from "../CDPDetails/CDPDetails";
 
 const SearchPage = () => {
     const {setQuery, query, CDPData, collateralType, setCollateralType, progress, isSearching} = useCDPQueue();
     const [state, setState] = useState<string>('');
-
+    const [selectedCDP, setSelectedCDP] = useState<FormattedCDP | null>(null)
     const noResults = query && CDPData.length === 0 && progress >= 1;
 
     const debouncedSetQuery = useCallback(
@@ -37,6 +38,8 @@ const SearchPage = () => {
     const data = sortCDPsByClosestId(CDPData, +query);
 
     return (
+        <>
+            {selectedCDP && <CDPDetails CDP={selectedCDP} setSelectedCDP={setSelectedCDP}/>}
         <div className={style.searchPage}>
             <header>
                 <h3>
@@ -60,11 +63,12 @@ const SearchPage = () => {
                     {isSearching && <ProgressBar progress={progress}/>}
                 </nav>
                 <section>
-                    <CDPResults data={data}/>
+                    <CDPResults setSelectedCDP={setSelectedCDP} data={data}/>
                     {noResults && <ZeroState />}
                 </section>
             </main>
         </div>
+        </>
     );
 }
 

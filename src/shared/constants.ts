@@ -751,3 +751,15 @@ export const collateralTypes = [
   "UNIV2AAVEETH-A",
   "UNIV2DAIUSDT-A"
 ];
+
+export const liquidationRatios = {
+    'ETH-A': 150,
+    'WBTC-A': 150,
+    'USDC-A': 101
+} as Record<string, number>;
+
+export const collateralPrices = {
+    'ETH-A': 2051,
+    'WBTC-A': 29917,
+    'USDC-A': 1
+} as Record<string, number>;
