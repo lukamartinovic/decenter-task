@@ -1,6 +1,7 @@
 .id {
   display: flex;
   align-items: center;
+
   button {
     display: flex;
     align-items: center;
@@ -11,6 +12,7 @@
     cursor: pointer;
     border-radius: 0.25rem;
     transition: all 200ms;
+
     &:hover {
       filter: opacity(0.5);
     }

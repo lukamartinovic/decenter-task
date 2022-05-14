@@ -1,23 +1,23 @@
-import {BigNumber} from "ethers";
+import { BigNumber } from "ethers";
 
 declare global {
     interface CDP {
-        collateral: BigNumber,
-        debt: BigNumber,
-        ilk: string,
-        owner: string,
-        urn: string,
-        userAddr: string,
-        id: number
+        collateral: BigNumber;
+        debt: BigNumber;
+        ilk: string;
+        owner: string;
+        urn: string;
+        userAddr: string;
+        id: number;
     }
 
     interface FormattedCDP {
-        collateral: string,
-        debt: string,
-        collateralType: string,
-        owner: string,
-        userAddr: string,
-        id: number
+        collateral: string;
+        debt: string;
+        collateralType: string;
+        owner: string;
+        userAddr: string;
+        id: number;
     }
 
     module "*.module.scss" {
@@ -27,5 +27,5 @@ declare global {
 
     type CollateralTypes = string;
 
-    module "*.svg"
+    module "*.svg";
 }

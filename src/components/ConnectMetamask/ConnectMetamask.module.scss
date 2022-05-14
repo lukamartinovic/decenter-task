@@ -20,17 +20,20 @@
       color: black;
       cursor: pointer;
       transition: all 200ms;
+
       &:not(:disabled):hover {
         background: #F6851B;
         color: whitesmoke;
-        border-color: rgba(0,0,0,0);
+        border-color: rgba(0, 0, 0, 0);
       }
+
       &:disabled {
         opacity: 0.4;
         cursor: auto;
       }
 
     }
+
     svg {
       width: 15vw;
     }

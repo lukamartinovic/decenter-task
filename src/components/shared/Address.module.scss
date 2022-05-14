@@ -2,6 +2,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   button {
     background: none;
     outline: none;
@@ -10,6 +11,7 @@
     padding: 0.25rem;
     border-radius: 0.25rem;
     transition: all 200ms;
+
     &:hover {
       filter: opacity(0.5);
     }

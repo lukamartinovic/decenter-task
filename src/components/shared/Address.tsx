@@ -1,21 +1,36 @@
 import React from "react";
-import {FaRegCopy} from "react-icons/fa";
-import style from './Address.module.scss';
+import { FaRegCopy } from "react-icons/fa";
+import style from "./Address.module.scss";
 
-const Address = ({address, truncate = true}: { address: string, truncate?: boolean }) => {
+const Address = ({
+    address,
+    truncate = true,
+}: {
+    address: string;
+    truncate?: boolean;
+}) => {
     const handleCopy = () => {
-        navigator.clipboard.writeText(address)
-    }
+        navigator.clipboard.writeText(address);
+    };
 
-    const addressString = truncate ? `${address.slice(0, 6)}...${address.slice(-6)}` : address;
+    const addressString = truncate
+        ? `${address.slice(0, 6)}...${address.slice(-6)}`
+        : address;
 
-    return <div className={style.address}>
-        <a href={`https://etherscan.io/address/${address}`} title={address}
-           target='_blank'>{addressString}</a>
-        <button>
-            <FaRegCopy onClick={handleCopy}/>
-        </button>
-    </div>
-}
+    return (
+        <div className={style.address}>
+            <a
+                href={`https://etherscan.io/address/${address}`}
+                title={address}
+                target="_blank"
+            >
+                {addressString}
+            </a>
+            <button>
+                <FaRegCopy onClick={handleCopy} />
+            </button>
+        </div>
+    );
+};
 
 export default Address;
