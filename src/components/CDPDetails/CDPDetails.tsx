@@ -15,8 +15,7 @@ type CDPDetailsProps = {
 
 const CDPDetails = ({CDP, setSelectedCDP}: CDPDetailsProps) => {
 
-    const {rates} = useRateContract(CDP.collateralType);
-    const rate = rates.find(rate => rate.collateralType === CDP.collateralType);
+    const {rate} = useRateContract(CDP.collateralType);
 
     if (!rate) return <></>;
 

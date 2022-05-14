@@ -49,10 +49,10 @@ const getLocaleString = (stringNumber: string | number | Decimal | BigNumber) =>
         return Number(stringNumber.toString()).toLocaleString()
 };
 
-export const getExtraCDPDetails = (CDP: FormattedCDP, rate: number, collateralPrices: Record<string, number>) => {
+export const getExtraCDPDetails = (CDP: FormattedCDP, rate: string, collateralPrices: Record<string, number>) => {
     const collateralPrice = collateralPrices[CDP.collateralType] || 1;
     const collateralInDai = new Decimal(formatEther(CDP.collateral)).mul(collateralPrice)
-    const totalDebt = new Decimal(getTotalDebt(CDP.debt.toString(), rate.toString()));
+    const totalDebt = new Decimal(getTotalDebt(CDP.debt.toString(), rate));
 
     const ratio = collateralInDai.div(totalDebt).mul(100)
     const liquidationRatio = (liquidationRatios[CDP.collateralType] || 150) / 100;

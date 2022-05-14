@@ -12,9 +12,7 @@ type CDPProps = {
 }
 
 export const CDP = ({data, setSelectedCDP}: CDPProps) => {
-    const {rates} = useRateContract(data.collateralType);
-
-    const rate = rates.find(rate => rate.collateralType === data.collateralType);
+    const {rate} = useRateContract(data.collateralType);
 
     if(!rate) return null;
 
@@ -29,7 +27,7 @@ export const CDP = ({data, setSelectedCDP}: CDPProps) => {
             <span>{Number(formatEther(data.collateral)).toLocaleString()} <small>{data.collateralType}</small></span>
         </td>
         <td>
-            <span>{Number(getTotalDebt(data.debt.toString(), rate.rate.toString())).toLocaleString()} <small>DAI</small></span>
+            <span>{Number(getTotalDebt(data.debt.toString(), rate.rate)).toLocaleString()} <small>DAI</small></span>
         </td>
         <td>
             <Address address={data.owner} />
