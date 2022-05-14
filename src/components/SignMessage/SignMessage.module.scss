@@ -1,0 +1,91 @@
+.signMessageButton {
+  border: lightgray;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  border: solid lightgray;
+  border-width: 0 0 1px 0;
+
+  &:not(:disabled):hover {
+    cursor: pointer;
+    background: whitesmoke;
+  }
+
+  &:not(:disabled):active {
+    background: lightgray;
+  }
+}
+
+.signMessage {
+  main {
+    padding: 0 1rem 1rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    small {
+      align-self: flex-start;
+    }
+
+    textarea {
+      width: 100%;
+      border-radius: 0.5rem;
+      border-color: lightgray;
+      padding: 1rem;
+      font-size: 1rem;
+      box-sizing: border-box;
+
+
+
+      &:focus {
+        outline: none;
+      }
+
+    }
+
+  }
+
+  > button {
+    background: none;
+    padding: 0.5rem 1.25rem;
+    font-size: 1.125rem;
+    border-radius: 0.875rem;
+    border: solid lightgray;
+    border-width: 0 0 1px 0;
+    background: whitesmoke;
+    transition: all 100ms;
+    margin: auto;
+    align-items: center;
+    display: flex;
+    gap: 0.5rem;
+
+    &:not(:disabled):hover {
+      cursor: pointer;
+      box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.2);
+    }
+
+    &:not(:disabled):active {
+      background: lightgray;
+    }
+
+    &:disabled {
+      background: lightgray;
+      color: whitesmoke;
+      cursor: auto;
+    }
+  }
+}
+
+.message {
+    text-align: start;
+    white-space: normal;
+    gap: 0;
+    p {
+      width: 100%;
+      white-space: normal;
+      font-style: italic;
+    }
+}

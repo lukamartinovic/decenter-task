@@ -7,6 +7,8 @@ import {useRateContract} from "../../shared/hooks/useRateContract";
 import {AiOutlineClose} from "react-icons/ai";
 import {FaExclamation} from "react-icons/fa";
 import {collateralPrices} from "../../shared/constants";
+import modalStyles from '../../shared/styles.module.scss'
+
 
 type CDPDetailsProps = {
     CDP: FormattedCDP,
@@ -31,9 +33,9 @@ const CDPDetails = ({CDP, setSelectedCDP}: CDPDetailsProps) => {
     } = extraCDPDetails
 
     return <>
-        <div className={style.backdrop}/>
-        <dialog open={true} className={style.CDPDetails}>
-            <header>
+        <div className={modalStyles.backdrop}/>
+        <dialog open={true} className={`${modalStyles.modal} ${style.CDPDetails}`}>
+            <header className={modalStyles.modalHeader}>
                 <div>CDP {CDP?.id} Details</div>
                 <button onClick={() => setSelectedCDP(null)}><AiOutlineClose/></button>
             </header>

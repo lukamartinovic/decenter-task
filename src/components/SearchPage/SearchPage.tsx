@@ -9,6 +9,8 @@ import ProgressBar from "../shared/ProgressBar";
 import {CDPResults} from "../CDPResults/CDPResults";
 import {ZeroState} from "../shared/ZeroState";
 import CDPDetails from "../CDPDetails/CDPDetails";
+import {ethers} from "ethers";
+import SignMessage from "../SignMessage/SignMessage";
 
 const SearchPage = () => {
     const {setQuery, query, CDPData, collateralType, setCollateralType, progress, isSearching} = useCDPQueue();
@@ -45,6 +47,7 @@ const SearchPage = () => {
                 <h3>
                     MakerDAO CDP Search
                 </h3>
+                <SignMessage />
             </header>
             <main>
                 <nav>

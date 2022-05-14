@@ -6,11 +6,13 @@
   justify-content: center;
 
   > header {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: space-between;
     width: 100%;
     background: white;
-    display: flex;
-    padding: 0.5rem 0.5rem 0.5rem 3rem;
-    height: 2rem;
+    padding: 0.5rem 2rem 0.5rem 2rem;
+    height: 3rem;
     align-items: center;
     border-bottom: 1px solid lightgray;
   }
